@@ -123,7 +123,7 @@ public class Hashtable {
                         return curr.value;
                     }
                 }
-                throw new Exception();
+                return null;
             }
         } else {
             throw new Exception();
