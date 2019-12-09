@@ -65,6 +65,7 @@ public class Hashtable {
      * first checks if the first position is empty
      * then checks if key value is the same, it will replace the value
      * otherwise loops until a next Node doesn't exist and adds to the end of the list.
+     * separate chaining
     ***********************************************************************************/
     void put (String key, String value){
         HashNode newNode = new HashNode(key, value);
@@ -97,11 +98,11 @@ public class Hashtable {
      * the Hashtable instance.
      ****************************************************************************************/
     String remove(String key) throws Exception {
-        HashNode removeNode = getNode(key);
-        HashNode nextNode = removeNode.next;
-        if(nextNode != null) {
-
-        }
+//        HashNode removeNode = getNode(key);
+//        HashNode nextNode = removeNode.next;
+//        if(nextNode != null) {
+//
+//        }
         HashNode head = bucket[getHash(key)];
 
         // if null, then done
@@ -122,7 +123,7 @@ public class Hashtable {
                         return curr.value;
                     }
                 }
-                return head.next.value;
+                throw new Exception();
             }
         } else {
             throw new Exception();
