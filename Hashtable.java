@@ -97,37 +97,33 @@ public class Hashtable {
      * with the key to the caller. Throws an Exception instance if the key is not present in
      * the Hashtable instance.
      ****************************************************************************************/
-    String remove(String key) throws Exception {
+    String remove(String key) {
 //        HashNode removeNode = getNode(key);
 //        HashNode nextNode = removeNode.next;
 //        if(nextNode != null) {
-//
 //        }
         HashNode head = bucket[getHash(key)];
+        HashNode prev = null;
 
         // if null, then done
-        if (head != null) {
-            if (head.key.equals(key)) {
-                bucket[getHash(key)] = head.next;
-                --entries;
-                return head.value;
-            } else {
-                HashNode prev = head;
-                HashNode curr;
+        while (head != null) {
+            if(head.key.equals(key))
+                break;
 
-                while (head.next != null) {
-                    curr = head.next;
-                    if (curr != null && curr.key == key) {
-                        head.next = curr.next;
-                        --entries;
-                        return curr.value;
-                    }
-                }
-                return null;
-            }
-        } else {
-            throw new Exception();
+                prev = head;
+                head = head.next;
         }
+
+        if(head == null) {
+            return null;
+        }
+        --entries;
+        if (prev != null)
+            prev.next = head.next;
+        else
+            bucket[getHash(key)] = head.next;
+
+        return head.value;
     }
     /***************
      *Hash Function
